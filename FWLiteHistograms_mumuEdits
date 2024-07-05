@@ -183,7 +183,7 @@ int main(int argc, char* argv[]) {
 
   TH1F* Nmuons_all_ = dir.make<TH1F>("Nmuons_all", "N",   11,  0.,  11.);
   TH1F* Nmuons_mumuSEL_ = dir.make<TH1F>("Nmuons_mumuSEL", "N", 11,  0.,  11.);
-  TH1F* MET_mumuSEL_ = dir.make<TH1F>("MET_mumuSEL", "N", 100, 0., 2400.);
+  TH1F* MET_mumuSEL_ = dir.make<TH1F>("MET_mumuSEL", "N", 200, 0., 6000.);
   //TH1F* MET_all_ = dir.make<TH1F>("MET_all", "N", 100, 0., 300.);
 
   //--electron
@@ -198,7 +198,7 @@ int main(int argc, char* argv[]) {
   //TH1F* eeMass_= dir.make<TH1F>("eeMass", "mass", 90,   30., 120.);
   TH1F* Nelectrons_all_ = dir.make<TH1F>("Nelectrons_all", "N", 11, 0., 11.);
   TH1F* Nelectrons_eeSEL_ = dir.make<TH1F>("Nelectrons_eeSEL", "N", 11,  0.,  11.);
-  TH1F* MET_eeSEL_ = dir.make<TH1F>("MET_eeSEL", "N", 100, 0., 2400.);
+  TH1F* MET_eeSEL_ = dir.make<TH1F>("MET_eeSEL", "N", 200, 0., 6000.);
 
   //--electron Muon 
   TH1F* elec_muonPt_ = dir.make<TH1F>("elec_muonPt", "pt", 100, 0., 300.);
@@ -210,7 +210,7 @@ int main(int argc, char* argv[]) {
   TH1F* elec_muonVX_ = dir.make<TH1F>("elec_muonVX", "vx",  100,  -0.5,  0.5);
   TH1F* elec_muonVY_ = dir.make<TH1F>("elec_muonVY", "vy",  100,  -0.5,  0.5);
   TH1F* elec_muonVZ_ = dir.make<TH1F>("elec_muonVZ", "vz",  100,  -30.,  30.);
-  TH1F* MET_emuSEL_  = dir.make<TH1F>("MET_emuSEL", "N",    100,  0.,  2400.);
+  TH1F* MET_emuSEL_  = dir.make<TH1F>("MET_emuSEL", "N",    200,  0.,  6000.);
 
   //-- Test sorting algorithm 
   //TH1F* isSortMuon_ = dir.make<TH1F>("isSortMuon", "Muon?", 2, 0., 2.);
