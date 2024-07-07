@@ -126,7 +126,7 @@ int main(int argc, char* argv[]) {
   //-- loading framework libraries 
   gSystem->Load("libFWCoreFWLite");
   FWLiteEnabler::enable();
-  AutoLibraryLoader::enable();
+  //AutoLibraryLoader::enable();
   //---------
   // :: used to access var/func inside a class 
   // FWLiteEnabler::enable()
@@ -136,16 +136,16 @@ int main(int argc, char* argv[]) {
   // Jet Corrections
   // Create the JetCorrectorParameter objects
   // YYYY is the first part of the txt files: usually the global tag from which they are retrieved
-  JetCorrectorParameters *ResJetPar = new JetCorrectorParameters("94X_mc2017_realistic_v12_L2L3Residual_AK5PF.txt");
-  JetCorrectorParameters *L3JetPar  = new JetCorrectorParameters("94X_mc2017_realistic_v12_L3Absolute_AK5PF.txt");
-  JetCorrectorParameters *L2JetPar  = new JetCorrectorParameters("94X_mc2017_realistic_v12_L2Relative_AK5PF.txt");
-  JetCorrectorParameters *L1JetPar  = new JetCorrectorParameters("94X_mc2017_realistic_v12_L1FastJet_AK5PF.txt");
+  //JetCorrectorParameters *ResJetPar = new JetCorrectorParameters("94X_mc2017_realistic_v12_L2L3Residual_AK5PF.txt");
+  //JetCorrectorParameters *L3JetPar  = new JetCorrectorParameters("94X_mc2017_realistic_v12_L3Absolute_AK5PF.txt");
+  //JetCorrectorParameters *L2JetPar  = new JetCorrectorParameters("94X_mc2017_realistic_v12_L2Relative_AK5PF.txt");
+  //JetCorrectorParameters *L1JetPar  = new JetCorrectorParameters("94X_mc2017_realistic_v12_L1FastJet_AK5PF.txt");
     //  Load the JetCorrectorParameter objects into a vector, IMPORTANT: THE ORDER MATTERS HERE !!!!
-  vector<JetCorrectorParameters> vPar;
-  vPar.push_back(*L1JetPar);
-  vPar.push_back(*L2JetPar);
-  vPar.push_back(*L3JetPar);
-  vPar.push_back(*ResJetPar);
+  //vector<JetCorrectorParameters> vPar;
+  //vPar.push_back(*L1JetPar);
+  //vPar.push_back(*L2JetPar);
+  //vPar.push_back(*L3JetPar);
+  //vPar.push_back(*ResJetPar);
     
 //  FactorizedJetCorrector *JetCorrector = new FactorizedJetCorrector(vPar)
    
@@ -678,12 +678,12 @@ int main(int argc, char* argv[]) {
               AK8_jetVZ_->Fill(ak8j1->vz());
                 
                 //JEC corrections
-                JetCorrector->setJetEta(eta);
-                JetCorrector->setJetPt(pt);
+               // JetCorrector->setJetEta(eta);
+                //JetCorrector->setJetPt(pt);
              //   JetCorrector->setJetA(area);
               //  JetCorrector->setRho(rho);
                 
-                double correction = JetCorrector->getCorrection();
+                //double correction = JetCorrector->getCorrection();
               
             }
           }
