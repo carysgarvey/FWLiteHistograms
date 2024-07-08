@@ -407,6 +407,8 @@ int main(int argc, char* argv[]) {
                       else {
                         num1++;
                       }
+
+                      
                       //-- opposite charge
                       if(mu1->charge() * mu2->charge() < 0) {
                         Double_t deltaR = deltaRvalue(mu1->eta(), mu2->eta(), mu1->phi(), mu2->phi());
@@ -415,6 +417,8 @@ int main(int argc, char* argv[]) {
                             Double_t muon2jet = deltaRvalue(mu2->eta(), jet->eta(), mu2->phi(), jet->phi());
                             deltaRVal_mu1_->Fill(muon1jet);
                             deltaRVal_mu2_->Fill(muon2jet);
+
+                            cout << "We reached this line of code" << muon1jet << muon2jet << endl;
 
                         }
                         if(deltaR > 0.) {
