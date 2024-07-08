@@ -130,7 +130,7 @@ int main(int argc, char* argv[]) {
   //-- loading framework libraries 
   gSystem->Load("libFWCoreFWLite");
   FWLiteEnabler::enable();
-  //AutoLibraryLoader::enable();
+  AutoLibraryLoader::enable();
   //---------
   // :: used to access var/func inside a class 
   // FWLiteEnabler::enable()
@@ -204,6 +204,7 @@ FactorizedJetCorrector *JetCorrector = new FactorizedJetCorrector(vPar);
   //TH1F* eeMass_= dir.make<TH1F>("eeMass", "mass", 90,   30., 120.);
   TH1F* Nelectrons_all_ = dir.make<TH1F>("Nelectrons_all", "N", 11, 0., 11.);
   TH1F* Nelectrons_eeSEL_ = dir.make<TH1F>("Nelectrons_eeSEL", "N", 11,  0.,  11.);
+// increased bin number and y axis range for MET
   TH1F* MET_eeSEL_ = dir.make<TH1F>("MET_eeSEL", "N", 200, 0., 6000.);
 
   //--electron Muon 
