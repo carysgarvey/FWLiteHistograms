@@ -50,8 +50,8 @@
 #include "DataFormats/HepMCCandidate/interface/GenParticle.h"
 
 // For jet correction
-#include "CondFormats/JetMETObjects/interface/JetCorrectorParameters.h"
-#include "CondFormats/JetMETObjects/interface/FactorizedJetCorrector.h"
+// #include "CondFormats/JetMETObjects/interface/JetCorrectorParameters.h"
+// #include "CondFormats/JetMETObjects/interface/FactorizedJetCorrector.h"
 
 using namespace std;
 using namespace edm;
@@ -130,7 +130,7 @@ int main(int argc, char* argv[]) {
   //-- loading framework libraries 
   gSystem->Load("libFWCoreFWLite");
   FWLiteEnabler::enable();
-  AutoLibraryLoader::enable();
+  // AutoLibraryLoader::enable();
   //---------
   // :: used to access var/func inside a class 
   // FWLiteEnabler::enable()
@@ -139,21 +139,21 @@ int main(int argc, char* argv[]) {
 
   // Jet Corrections
   // Create the JetCorrectorParameter objects
-JetCorrectorParameters *L1JetPar = new JetCorrectorParameters("/uscms/home/cgarvey/SUSY_Filtering/CMSSW_10_6_4/src/JECFiles/AK8/Fall17_17Nov2017_V32_MC_L1FastJet_AK8PF.txt");
-JetCorrectorParameters *L2JetPar = new JetCorrectorParameters("/uscms/home/cgarvey/SUSY_Filtering/CMSSW_10_6_4/src/JECFiles/AK8/Fall17_17Nov2017_V32_MC_L2Relative_AK8PF.txt");
-JetCorrectorParameters *L3JetPar = new JetCorrectorParameters("/uscms/home/cgarvey/SUSY_Filtering/CMSSW_10_6_4/src/JECFiles/AK8/Fall17_17Nov2017_V32_MC_L3Absolute_AK8PF.txt");
+// JetCorrectorParameters *L1JetPar = new JetCorrectorParameters("/uscms/home/cgarvey/SUSY_Filtering/CMSSW_10_6_4/src/JECFiles/AK8/Fall17_17Nov2017_V32_MC_L1FastJet_AK8PF.txt");
+// JetCorrectorParameters *L2JetPar = new JetCorrectorParameters("/uscms/home/cgarvey/SUSY_Filtering/CMSSW_10_6_4/src/JECFiles/AK8/Fall17_17Nov2017_V32_MC_L2Relative_AK8PF.txt");
+// JetCorrectorParameters *L3JetPar = new JetCorrectorParameters("/uscms/home/cgarvey/SUSY_Filtering/CMSSW_10_6_4/src/JECFiles/AK8/Fall17_17Nov2017_V32_MC_L3Absolute_AK8PF.txt");
 
 // For data, add the L2L3Residual correction
-JetCorrectorParameters *ResJetPar = new JetCorrectorParameters("/uscms/home/cgarvey/SUSY_Filtering/CMSSW_10_6_4/src/JECFiles/AK8/Fall17_17Nov2017_V32_MC_L2L3Residual_AK8PF.txt");
+// JetCorrectorParameters *ResJetPar = new JetCorrectorParameters("/uscms/home/cgarvey/SUSY_Filtering/CMSSW_10_6_4/src/JECFiles/AK8/Fall17_17Nov2017_V32_MC_L2L3Residual_AK8PF.txt");
 
     //  Load the JetCorrectorParameter objects into a vector, IMPORTANT: THE ORDER MATTERS HERE !!!!
-std::vector<JetCorrectorParameters> vPar;
-vPar.push_back(*L1JetPar);
-vPar.push_back(*L2JetPar);
-vPar.push_back(*L3JetPar);
-vPar.push_back(*ResJetPar); // Include this only for data
+// std::vector<JetCorrectorParameters> vPar;
+// vPar.push_back(*L1JetPar);
+// vPar.push_back(*L2JetPar);
+// vPar.push_back(*L3JetPar);
+// vPar.push_back(*ResJetPar); // Include this only for data
     
-FactorizedJetCorrector *JetCorrector = new FactorizedJetCorrector(vPar);
+// FactorizedJetCorrector *JetCorrector = new FactorizedJetCorrector(vPar);
    
   //-- init command line parser
   optutl::CommandLineParser parser ("Analyze FWLite Histograms");
@@ -675,26 +675,33 @@ FactorizedJetCorrector *JetCorrector = new FactorizedJetCorrector(vPar);
           int n_ak8 = 0;
           for(vector<Jet>::const_iterator ak8j1 = AK8jets->begin(); ak8j1 != AK8jets->end(); ak8j1++) {
             if(ak8j1->pt() > 20 && fabs(ak8j1->eta()) < 2.4) {
-              n_ak8++;
+                n_ak8++;
+
+              AK8_jetPt_->Fill(ak8j1->pt());
+              AK8_jetEta_->Fill(ak8j1->eta());
+              AK8_jetPhi_->Fill(ak8j1->phi());
+              AK8_jetVX_->Fill(ak8j1->vx());
+              AK8_jetVY_->Fill(ak8j1->vy());
+              AK8_jetVZ_->Fill(ak8j1->vz());
 
         // Set the JetCorrector parameters
-        JetCorrector->setJetPt(ak8j1->pt());
-        JetCorrector->setJetEta(ak8j1->eta());
-        JetCorrector->setJetE(ak8j1->energy());
+        // JetCorrector->setJetPt(ak8j1->pt());
+        // JetCorrector->setJetEta(ak8j1->eta());
+        // JetCorrector->setJetE(ak8j1->energy());
         //JetCorrector->setRho(1.0); // Replace with actual rho value 
         //JetCorrector->setJetA(0.5); // Replace with actual jet area
         //JetCorrector->setNPV(1); // Replace with actual number of primary vertices 
 
-        double correction = JetCorrector->getCorrection();
-        ak8j1->scaleEnergy(correction);
+        //double correction = JetCorrector->getCorrection();
+        //ak8j1->scaleEnergy(correction);
 
         // Use the corrected jet for further calculations or histogram filling
-        AK8_jetPt_->Fill(ak8j1->pt());
-        AK8_jetEta_->Fill(ak8j1->eta());
-        AK8_jetPhi_->Fill(ak8j1->phi());
-        AK8_jetVX_->Fill(ak8j1->vx());
-        AK8_jetVY_->Fill(ak8j1->vy());
-        AK8_jetVZ_->Fill(ak8j1->vz());
+        //AK8_jetPt_->Fill(ak8j1->pt());
+        //AK8_jetEta_->Fill(ak8j1->eta());
+        //AK8_jetPhi_->Fill(ak8j1->phi());
+        //AK8_jetVX_->Fill(ak8j1->vx());
+        //AK8_jetVY_->Fill(ak8j1->vy());
+        //AK8_jetVZ_->Fill(ak8j1->vz());
               
             }
           }
